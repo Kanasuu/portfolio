@@ -1,0 +1,38 @@
+{
+  "name": "kanasu-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "gaze:generate": "node scripts/generate-gaze-frames.mjs",
+    "gaze:free": "python scripts/generate_gaze_frames_free.py"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.133.0",
+    "@pixiv/three-vrm": "3.5.5",
+    "@react-three/drei": "10.7.6",
+    "@react-three/fiber": "9.3.0",
+    "framer-motion": "12.43.0",
+    "lucide-react": "0.544.0",
+    "next": "15.5.28",
+    "react": "19.1.10",
+    "react-dom": "19.1.10",
+    "three": "0.180.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "3.3.1",
+    "@tailwindcss/postcss": "4.1.13",
+    "@types/node": "22.18.6",
+    "@types/react": "19.1.13",
+    "@types/react-dom": "19.1.9",
+    "@types/three": "0.180.0",
+    "eslint": "9.36.0",
+    "eslint-config-next": "15.5.28",
+    "tailwindcss": "4.1.13",
+    "typescript": "5.9.2"
+  }
+}
