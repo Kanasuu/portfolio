@@ -279,7 +279,8 @@ export default function RecruiterChat() {
 function Avatar({ size }: { size: string }) {
   return (
     <span className={`relative ${size} shrink-0 overflow-hidden rounded-full border-2 border-white bg-lilac shadow-sm`}>
-      <Image src="/character.webp" alt="" fill sizes="44px" className="scale-150 object-cover object-[50%_22%]" />
+      {/* Headshot from the first frame of the idle clip, background removed (lilac shows behind). */}
+      <Image src="/character/avatar.webp" alt="" fill sizes="44px" className="object-cover" />
     </span>
   );
 }

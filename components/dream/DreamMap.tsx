@@ -34,7 +34,7 @@ const places: Place[] = [
   { id: "about", label: "About", hint: "Who I am", Icon: UserRound, color: "#f472b6", angle: 212, reaction: { clip: "spin", line: "Nice to meet you." } },
   { id: "projects", label: "Projects", hint: "Case studies", Icon: FolderGit2, color: "#a78bfa", angle: 180, reaction: { clip: "laptop", line: "Here's what I've been building." } },
   { id: "skills", label: "Skills", hint: "Tools I use", Icon: Wrench, color: "#2dd4bf", angle: 148, reaction: { line: "The tools I work with." } },
-  { id: "experience", label: "Experience", hint: "Where I've worked", Icon: Briefcase, color: "#fb923c", angle: -32, reaction: { clip: "spin", line: "Here's where I've shipped work." } },
+  { id: "experience", label: "Experience", hint: "Where I've worked", Icon: Briefcase, color: "#fb923c", angle: -32, reaction: { line: "Here's where I've shipped work." } },
   { id: "achievements", label: "Achievements", hint: "Awards & certificates", Icon: Trophy, color: "#facc15", angle: 0, reaction: { clip: "celebrate", line: "A few milestones I'm proud of." } },
   { id: "contact", label: "Contact", hint: "Get in touch", Icon: Mail, color: "#60a5fa", angle: 32, reaction: { clip: "contact", line: "I'd love to hear from you." } },
 ];
@@ -44,7 +44,7 @@ const isPlace = (id: string): id is PlaceId => places.some((p) => p.id === id);
 /**
  * One-screen galaxy map: Kanasu's character in the middle of space, with the sections orbiting her
  * as planets. A planet opens its section in a glass panel (a sheet on small screens) and she reacts
- * with her own clip per section (spin, laptop, celebrate, wave).
+ * with her own clip per section (spin, laptop, celebrate, contact).
  */
 export default function DreamMap() {
   const { targetRef, pointer, handlers } = useCharacterPointer();
@@ -121,7 +121,8 @@ export default function DreamMap() {
   }, [active]);
 
   const place = places.find((p) => p.id === active) ?? null;
-  const side = active ? "xl:left-[33%]" : "xl:left-[63%]";
+  // With a panel open she stays full size, centred in the space left of it (the panel is min(56rem,52vw) wide, 1.5rem from the right).
+  const side = active ? "xl:left-[calc((100vw-min(56rem,52vw)-1.5rem)/2)]" : "xl:left-[63%]";
 
   return (
     <div
@@ -174,9 +175,7 @@ export default function DreamMap() {
 
         {/* The character: a 4:5 crop on small screens, a wide 4:3 stage anchored to the bottom on wide screens. */}
         <div
-          className={`relative mx-auto mt-16 h-[var(--h)] w-[calc(var(--h)*0.8)] max-w-full origin-bottom transition-[left,scale] duration-700 ease-[cubic-bezier(.22,1,.36,1)] xl:absolute xl:bottom-0 xl:mt-0 xl:w-[calc(var(--h)*4/3)] xl:max-w-none xl:-translate-x-1/2 ${side} ${
-            active ? "xl:scale-[0.8]" : ""
-          }`}
+          className={`relative mx-auto mt-16 h-[var(--h)] w-[calc(var(--h)*0.8)] max-w-full origin-bottom transition-[left] duration-700 ease-[cubic-bezier(.22,1,.36,1)] xl:absolute xl:bottom-0 xl:mt-0 xl:w-[calc(var(--h)*4/3)] xl:max-w-none xl:-translate-x-1/2 ${side}`}
         >
           <HeroCharacter pointer={pointer} targetRef={targetRef} variant="open" />
         </div>
